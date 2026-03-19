@@ -129,9 +129,9 @@ Through this project, the following concepts were strengthened:
 
 ## 👨‍💻 Author
 
-**Jarpla Vijay Kumar**
-Electronics and Communication Engineering  
-Embedded Systems & Software Developer  
+**Jarpla Vijay Kumar**  
+* Electronics and Communication Engineering  
+* Embedded Systems & Software Developer  
 
 ---
 
