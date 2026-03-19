@@ -1,90 +1,115 @@
-// This function takes user-defined header file content
-// and copies it into the output file
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include"file_inclusion.h"
+// This function processes header file inclusion directives
+// It copies user-defined and standard header file contents into the output file
+
+#include<stdio.h>      // File handling functions
+#include<stdlib.h>     // exit()
+#include<string.h>     // String handling functions
+#include"file_inclusion.h"   // User-defined header
+
 void header_file_inclusion(const char *inputfile,const char *outputfile)
 {
         int i,j;
-        char str[100],header[100];
-        FILE *fin=NULL;
-        FILE *fout=NULL;
-        FILE *fheader=NULL;
-        fin=fopen(inputfile,"r");
-        fout=fopen(outputfile,"w");
-        if(fin==NULL||fout==NULL)
+        char str[100], header[100];   // Buffers for reading lines and header names
+
+        FILE *fin = NULL;      // Input source file pointer
+        FILE *fout = NULL;     // Output file pointer
+        FILE *fheader = NULL;  // Header file pointer
+
+        // Open input and output files
+        fin = fopen(inputfile,"r");
+        fout = fopen(outputfile,"w");
+
+        // Check for file opening errors
+        if(fin == NULL || fout == NULL)
         {
-                printf("failed to open\n");
+                printf("Failed to open file\n");
                 exit(0);
         }
-        // reading input file line by line
-        while((fgets(str,sizeof(str),fin))!=NULL)
+
+        // Read input file line by line
+        while((fgets(str,sizeof(str),fin)) != NULL)
         {
-                // checking if line contains #include "file"
-                if(strstr(str,"#include\"")!=NULL)
+                // -------- USER-DEFINED HEADER FILE --------
+                // Check if line contains: #include "filename.h"
+                if(strstr(str,"#include\"") != NULL)
                 {
-                        // finding starting quote
-                        i=0;
-                        while(str[i]!='"')
+                        // Find the starting quote of header file name
+                        i = 0;
+                        while(str[i] != '\"')
                         {
                                 i++;
                         }
-                        if(str[i]=='"')
+
+                        // Move to first character of filename
+                        if(str[i] == '\"')
                         {
-                                i++;// move to first character of filename
+                                i++;
                         }
-                        j=0;
-                        //extracting the header file name
-			while(str[i]!='"')
+
+                        j = 0;
+
+                        // Extract header file name between quotes
+                        while(str[i] != '\"')
                         {
-                                header[j]=str[i];
+                                header[j] = str[i];
                                 i++;
                                 j++;
                         }
-                        header[j]='\0';
-                        //opening the header file
-                        //copying the header file content to output file
-                        fheader=fopen(header,"r");
-                        if(fheader==NULL)
+                        header[j] = '\0';   // Null-terminate the string
+
+                        // Open the header file
+                        fheader = fopen(header,"r");
+
+                        if(fheader == NULL)
                         {
-                                printf("failed to open\n");
+                                printf("Failed to open header file\n");
                                 exit(0);
                         }
                         else
                         {
-                                while((fgets(str,sizeof(str),fheader))!=NULL)
+                                // Copy header file contents to output file
+                                while((fgets(str,sizeof(str),fheader)) != NULL)
                                 {
                                         fputs(str,fout);
                                 }
                                 fclose(fheader);
                         }
                 }
-		else if(strstr(str,"#include<")!=NULL)
+
+                // -------- STANDARD HEADER FILE --------
+                // Check if line contains: #include <...>
+                else if(strstr(str,"#include<") != NULL)
                 {
-                  char path[300]="/usr/include/stdio.h";
-                  fheader=fopen(path,"r");
-                        if(fheader==NULL)
+                        // Example path for standard header (simplified handling)
+                        char path[300]="/usr/include/stdio.h";
+
+                        fheader = fopen(path,"r");
+
+                        if(fheader == NULL)
                         {
-                                printf("Error:header file is not found\n");
+                                printf("Error: Standard header file not found\n");
                                 exit(0);
                         }
                         else
                         {
-                                while((fgets(str,sizeof(str),fheader))!=NULL)
+                                // Copy standard header content to output file
+                                while((fgets(str,sizeof(str),fheader)) != NULL)
                                 {
                                         fputs(str,fout);
                                 }
                                 fclose(fheader);
                         }
                 }
-                //remaining normal lines are copied as it is
+
+                // -------- NORMAL CODE --------
+                // Copy remaining lines as it is
                 else
                 {
                         fputs(str,fout);
                 }
         }
-        //closing the both files
+
+        // Close both input and output files
         fclose(fin);
         fclose(fout);
 }
