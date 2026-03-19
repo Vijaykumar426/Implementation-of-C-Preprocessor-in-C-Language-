@@ -25,12 +25,12 @@ To design and implement a simplified C preprocessor that prepares source code fo
 
 ## ✨ Key Features
 
-✔ Removes single-line comments (`// comment`)
-✔ Removes multi-line comments (`/* comment */`)
-✔ Performs macro replacement and expansion
-✔ Processes header file inclusion directives
-✔ Generates clean intermediate source code
-✔ Improves code readability and compilation efficiency
+✔ Removes single-line comments (`// comment`)  
+✔ Removes multi-line comments (`/* comment */`)  
+✔ Performs macro replacement and expansion  
+✔ Processes header file inclusion directives  
+✔ Generates clean intermediate source code  
+✔ Improves code readability and compilation efficiency  
 
 ---
 
@@ -68,11 +68,11 @@ To design and implement a simplified C preprocessor that prepares source code fo
 
 ## ▶️ How It Works
 
-1️⃣ The program reads the input C source file
-2️⃣ Comments are detected and removed
-3️⃣ Macro definitions are identified and replaced
-4️⃣ Header files are located and included
-5️⃣ A cleaned output file is generated
+1️⃣ The program reads the input C source file  
+2️⃣ Comments are detected and removed  
+3️⃣ Macro definitions are identified and replaced  
+4️⃣ Header files are located and included  
+5️⃣ A cleaned output file is generated  
 
 ---
 
@@ -98,48 +98,48 @@ To design and implement a simplified C preprocessor that prepares source code fo
 
 Through this project, the following concepts were strengthened:
 
-✅ Working of C preprocessing stage
-✅ Compiler design basics
-✅ File input/output operations
-✅ String parsing and manipulation
-✅ Pattern detection techniques
-✅ Code optimization fundamentals
+✅ Working of C preprocessing stage  
+✅ Compiler design basics  
+✅ File input/output operations  
+✅ String parsing and manipulation  
+✅ Pattern detection techniques  
+✅ Code optimization fundamentals  
 
 ---
 
 ## 🚀 Applications
 
-🔹 Compiler construction learning
-🔹 Code optimization tools
-🔹 Static code analysis tools
-🔹 Educational tools for programming students
-🔹 Source code formatting utilities
+🔹 Compiler construction learning  
+🔹 Code optimization tools  
+🔹 Static code analysis tools  
+🔹 Educational tools for programming students  
+🔹 Source code formatting utilities  
 
 ---
 
 ## 🔮 Future Improvements
 
-* Support for conditional compilation directives
-* Handling nested header files
-* Macro function expansion support
-* Integration with mini-compiler
-* GUI-based source code viewer
-
+* Support for conditional compilation directives  
+* Handling nested header files  
+* Macro function expansion support  
+* Integration with mini-compiler  
+* GUI-based source code viewer  
+  
 ---
 
 ## 👨‍💻 Author
 
 **Jarpla Vijay Kumar**
-Electronics and Communication Engineering
-Embedded Systems & Software Developer
+Electronics and Communication Engineering  
+Embedded Systems & Software Developer  
 
 ---
 
 ## ⭐ Project Status
 
-✅ Completed
-🧪 Tested with multiple C source files
-📄 Accurate preprocessing results generated
+✅ Completed  
+🧪 Tested with multiple C source files  
+📄 Accurate preprocessing results generated  
 
 ---
 
