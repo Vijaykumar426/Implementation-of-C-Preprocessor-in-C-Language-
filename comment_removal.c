@@ -1,55 +1,67 @@
-// removes both single-line and multi-line comments
-#include<stdio.h>
-#include<stdlib.h>
-#include"comment_removal.h"
+// This function removes both single-line (//) and multi-line (/* */) comments
+// from a C source file and generates a clean output file.
+
+#include<stdio.h>      // File handling functions
+#include<stdlib.h>     // exit()
+#include"comment_removal.h"   // User-defined header
+
 void remove_comments(const char *inputfile,const char *outputfile)
 {
-    char ch, next;
-    FILE *fin=NULL;
-    FILE *fout=NULL;
-    // opening input file in read mode and output file in write mode
+    char ch, next;     // Variables to store characters from file
+    FILE *fin = NULL;  // Pointer for input file
+    FILE *fout = NULL; // Pointer for output file
+
+    // Open input file in read mode and output file in write mode
     fin = fopen(inputfile, "r");
     fout = fopen(outputfile, "w");
+
+    // Check for file opening errors
     if(fin == NULL || fout == NULL)
     {
-        printf("failed to open\n");
+        printf("Failed to open file\n");
         exit(0);
     }
-    //reading line by line and searching for single line comment /
+
+    // Read file character-by-character
     while((ch = fgetc(fin)) != EOF)
     {
+        // Detect start of a possible comment
         if(ch == '/')
         {
             next = fgetc(fin);
-            // single line comment
+
+            // -------- SINGLE-LINE COMMENT --------
+            // If '//' is detected, skip until end of line
             if(next == '/')
             {
-		// skip characters until newline is found
                 while((ch = fgetc(fin)) != '\n' && ch != EOF);
-                fputc('\n', fout);// write newline in output
+                fputc('\n', fout);  // Preserve line structure
                 continue;
             }
-             // checking for multi-line comment 
+
+            // -------- MULTI-LINE COMMENT --------
+            // If '/*' is detected, skip until '*/'
             else if(next == '*')
             {
-		// keep reading until closing comment
                 while(1)
                 {
                     ch = fgetc(fin);
-                    if(ch == EOF)
-		    {
+
+                    if(ch == EOF)   // End if file ends unexpectedly
                         break;
-		    }
+
                     if(ch == '*')
                     {
                         next = fgetc(fin);
                         if(next == '/')
-                            break;
+                            break;  // End of multi-line comment
                     }
                 }
-                continue;// skip writing comment part
+                continue;   // Skip comment content
             }
-            // if it is not comment, write both characters
+
+            // -------- NOT A COMMENT --------
+            // If '/' is normal character, write both characters
             else
             {
                 fputc(ch, fout);
@@ -57,13 +69,16 @@ void remove_comments(const char *inputfile,const char *outputfile)
                 continue;
             }
         }
-	// normal characters are directly written to output
+
+        // -------- NORMAL CHARACTER --------
+        // Write normal program characters directly to output
         else
         {
             fputc(ch, fout);
         }
     }
+
+    // Close both files
     fclose(fin);
     fclose(fout);
 }
-
