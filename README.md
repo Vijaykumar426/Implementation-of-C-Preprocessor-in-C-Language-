@@ -1,4 +1,4 @@
-# 🧩 C Preprocessor Simulation Tool
+# 🧩 Implementation of C Preprocessor in C Language  
 
 <p align="center">
   <img src="https://img.shields.io/badge/Language-C-blue">
